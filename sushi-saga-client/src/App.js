@@ -20,15 +20,14 @@ class App extends Component {
       .then((sushi) => this.setState({ sushi }));
   }
 
-  eatSushi = (id) => {
-    const moneyLeft =
-      this.state.moneyLeft - this.state.sushi.find((e) => e.id === id).price;
+  eatSushi = (item) => {
+    const moneyLeft = this.state.moneyLeft - item.price;
 
     if (moneyLeft >= 0) {
       this.setState({
         moneyLeft,
         sushi: this.state.sushi.map((piece) => {
-          if (piece.id === id) {
+          if (piece.id === item.id) {
             piece.eaten = true;
           }
           return piece;

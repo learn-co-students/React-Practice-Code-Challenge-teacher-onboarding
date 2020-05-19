@@ -11,8 +11,8 @@ const SushiContainer = (props) => {
     setCurrentIndex(currentIndex + NUM_ITEMS);
   }
 
-  function eatSushi(id) {
-    props.eatSushi(id);
+  function eatSushi(item) {
+    props.eatSushi(item);
   }
 
   return (
