@@ -1,14 +1,13 @@
 import React from 'react';
 
 const Sushi = (props) => {
-  const { name, price, img_url } = props.item;
+  const { id, name, price, img_url, eaten } = props.item;
 
   return (
     <div className="sushi">
-      <div className="plate" onClick={/* Give me a callback! */ null}>
+      <div className="plate" onClick={() => props.handleClick(id)}>
         {
-          /* Tell me if this sushi has been eaten! */
-          false ? null : <img src={img_url} alt={name} width="100%" />
+          eaten ? null : <img src={img_url} alt={name} width="100%" />
         }
       </div>
       <h4 className="sushi-details">

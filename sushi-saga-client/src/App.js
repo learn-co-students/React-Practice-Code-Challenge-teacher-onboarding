@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
-import Sushi from './components/Sushi';
 
-// Endpoint!
 const API = 'http://localhost:3000/sushis';
 
 class App extends Component {
@@ -20,10 +18,21 @@ class App extends Component {
       .then((sushi) => this.setState({ sushi }));
   }
 
+  eatSushi = (id) => {
+    this.setState({
+      sushi: this.state.sushi.map((piece) => {
+        if (piece.id === id) {
+          piece.eaten = true;
+        }
+        return piece;
+      }),
+    });
+  };
+
   render() {
     return (
       <div className="app">
-        <SushiContainer sushi={this.state.sushi} />
+        <SushiContainer sushi={this.state.sushi} eatSushi={this.eatSushi} />
         <Table />
       </div>
     );
