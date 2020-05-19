@@ -15,14 +15,18 @@ const SushiContainer = (props) => {
     props.eatSushi(item);
   }
 
+  function getSushi() {
+    return props.sushi
+      .slice(currentIndex, NUM_ITEMS + currentIndex)
+      .map((item) => (
+        <Sushi item={item} key={item.id} handleClick={eatSushi}></Sushi>
+      ));
+  }
+
   return (
     <Fragment>
       <div className="belt">
-        {props.sushi
-          .slice(currentIndex, NUM_ITEMS + currentIndex)
-          .map((item) => (
-            <Sushi item={item} key={item.id} handleClick={eatSushi}></Sushi>
-          ))}
+        {getSushi()}
         <MoreButton handleClick={showNext} />
       </div>
     </Fragment>
