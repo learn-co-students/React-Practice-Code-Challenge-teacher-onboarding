@@ -3,9 +3,21 @@ import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
 
 // Endpoint!
-const API = "http://localhost:3000/sushis"
+const API = 'http://localhost:3000/sushis';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      sushi: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch(API)
+      .then((res) => res.json())
+      .then((sushi) => this.setState({ sushi }));
+  }
 
   render() {
     return (
