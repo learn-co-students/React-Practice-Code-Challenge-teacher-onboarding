@@ -9,6 +9,7 @@ class App extends Component {
     super();
     this.state = {
       sushi: [],
+      eaten: [],
     };
   }
 
@@ -19,6 +20,9 @@ class App extends Component {
   }
 
   eatSushi = (id) => {
+    this.setState({
+      eaten: [...this.state.eaten, this.state.sushi.find((e) => e.id === id)],
+    });
     this.setState({
       sushi: this.state.sushi.map((piece) => {
         if (piece.id === id) {
@@ -33,7 +37,7 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer sushi={this.state.sushi} eatSushi={this.eatSushi} />
-        <Table />
+        <Table plates={this.state.eaten} />
       </div>
     );
   }
