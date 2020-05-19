@@ -10,7 +10,7 @@ class App extends Component {
     super();
     this.state = {
       sushi: [],
-      money: START_MONEY,
+      moneyLeft: START_MONEY,
     };
   }
 
@@ -21,21 +21,30 @@ class App extends Component {
   }
 
   eatSushi = (id) => {
-    this.setState({
-      sushi: this.state.sushi.map((piece) => {
-        if (piece.id === id) {
-          piece.eaten = true;
-        }
-        return piece;
-      }),
-    });
+    const moneyLeft =
+      this.state.moneyLeft - this.state.sushi.find((e) => e.id === id).price;
+
+    if (moneyLeft >= 0) {
+      this.setState({
+        moneyLeft,
+        sushi: this.state.sushi.map((piece) => {
+          if (piece.id === id) {
+            piece.eaten = true;
+          }
+          return piece;
+        }),
+      });
+    }
   };
 
   render() {
     return (
       <div className="app">
         <SushiContainer sushi={this.state.sushi} eatSushi={this.eatSushi} />
-        <Table plates={this.state.sushi.filter((e) => e.eaten)} money={this.state.money} />
+        <Table
+          plates={this.state.sushi.filter((e) => e.eaten)}
+          money={this.state.moneyLeft}
+        />
       </div>
     );
   }

@@ -9,10 +9,11 @@ const Table = (props) => {
     });
   };
 
+
   return (
     <Fragment>
       <h1 className="remaining">
-        You have: ${props.money - props.plates.reduce((a, c) => a + c.price, 0)}{' '}
+        You have: ${props.money}{' '}
         remaining!
       </h1>
       <div className="table">
